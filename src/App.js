@@ -10,7 +10,7 @@ import './views/skeleton.css'
 const App = () => {
 
   let [guides, setGuides] = useState([])
-  
+
 
   const getGuides = () => {
     axios
@@ -21,7 +21,7 @@ const App = () => {
       )
       .catch((error) => console.error(error))
    }
-   
+
    useEffect(() => {
     getGuides()
    }, [])
@@ -52,12 +52,12 @@ const App = () => {
   }
 
   return (
-    
+
     <>
     <Header />
     <Add handleCreate={handleCreate}/>
       <div className="people">
-      
+
     {guides.map((guide) => {
       return (
      <div className="person" key={guide.id}>
@@ -65,7 +65,7 @@ const App = () => {
        <h5>author_id: {guide.author_id}</h5>
        <h5>likes: {guide.likes}</h5>
        <h5>content: {guide.content}</h5>
-       <h5>image: {guide.image}</h5>
+       <img src = {guide.image} alt={guide.name} />
        <h5>rating: {guide.rating}</h5>
 
        <Edit handleUpdate={handleUpdate} id={guide.id}/>
