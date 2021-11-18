@@ -26,9 +26,9 @@ const App = () => {
     getGuides()
    }, [])
 
-   const handleCreate = (addPerson) => {
+   const handleCreate = (addGuide) => {
     axios
-      .post('http://localhost:8000/api/guides', addPerson)
+      .post('http://localhost:8000/api/guides', addGuide)
       .then((response) => {
         console.log(response)
         getGuides()
@@ -42,10 +42,10 @@ const App = () => {
       })
   }
 
-  const handleUpdate = (editPerson) => {
-    console.log(editPerson)
+  const handleUpdate = (editGuide) => {
+    console.log(editGuide)
     axios
-      .put('http://localhost:8000/api/guides/' + editPerson.id, editPerson)
+      .put('http://localhost:8000/api/guides/' + editGuide.id, editGuide)
       .then((response) => {
         getGuides()
       })
