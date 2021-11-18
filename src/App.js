@@ -10,25 +10,25 @@ import './views/skeleton.css'
 const App = () => {
 
   let [guides, setGuides] = useState([])
-  
+
 
   const getGuides = () => {
     axios
-      .get('http://localhost:8000/api/characters')
+      .get('http://localhost:8000/api/guides')
       .then(
         (response) => setGuides(response.data),
         (err) => console.error(err)
       )
       .catch((error) => console.error(error))
    }
-   
+
    useEffect(() => {
     getGuides()
    }, [])
 
    const handleCreate = (addPerson) => {
     axios
-      .post('http://localhost:8000/api/characters', addPerson)
+      .post('http://localhost:8000/api/guides', addPerson)
       .then((response) => {
         console.log(response)
         getGuides()
@@ -36,7 +36,7 @@ const App = () => {
   }
   const handleDelete = (event) => {
     axios
-      .delete('http://localhost:8000/api/characters/' + event.target.value)
+      .delete('http://localhost:8000/api/guides/' + event.target.value)
       .then((response) => {
         getGuides()
       })
@@ -45,19 +45,19 @@ const App = () => {
   const handleUpdate = (editPerson) => {
     console.log(editPerson)
     axios
-      .put('http://localhost:8000/api/characters/' + editPerson.id, editPerson)
+      .put('http://localhost:8000/api/guides/' + editPerson.id, editPerson)
       .then((response) => {
         getGuides()
       })
   }
 
   return (
-    
+
     <>
     <Header />
     <Add handleCreate={handleCreate}/>
       <div className="people">
-      
+
     {guides.map((guide) => {
       return (
      <div className="person" key={guide.id}>
@@ -65,7 +65,7 @@ const App = () => {
        <h5>author_id: {guide.author_id}</h5>
        <h5>likes: {guide.likes}</h5>
        <h5>content: {guide.content}</h5>
-       <h5>image: {guide.image}</h5>
+       <img src = {guide.image} alt={guide.name} />
        <h5>rating: {guide.rating}</h5>
 
        <Edit handleUpdate={handleUpdate} id={guide.id}/>
